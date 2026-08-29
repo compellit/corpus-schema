@@ -1,0 +1,173 @@
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+     xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI customization for the COMPEL project</title>
+        <author>Pablo Ruiz Fabo</author>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>CiTIUS - Universidade de Santiago de Compostela</publisher>
+        <publisher>COMPEL project</publisher>
+        <availability status="free">
+          <licence target="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA</licence>
+        </availability>
+      </publicationStmt>
+      <notesStmt>
+         <note type="ns">https://compellit.github.io</note>
+      </notesStmt>
+      <sourceDesc>
+        <p>Based on TEI Minimal via ROMA.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <appInfo>
+        <application ident="RomaJS" version="1.3.2" when="2026">
+          <desc>File edited with <ref target="https://github.com/TEIC/romajs">RomaJS</ref></desc>
+        </application>
+      </appInfo>
+    </encodingDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <head>TEI for COMPEL project</head>
+      
+      <schemaSpec ident="tei_cmpl" start="TEI" prefix="tei_" targetLang="en" docLang="en">
+        <!-- broad initial coverage for elements currently used in the corpus -->
+        <moduleRef key="linking"/>
+        <moduleRef key="namesdates"/>
+        <moduleRef key="verse"/>
+        <moduleRef key="tagdocs"/>
+        <moduleRef key="header"/>
+        
+        <!-- keep core and textstructure broad while the corpus profile is still settling -->
+        <moduleRef key="core"/>
+        
+        <!-- Schematron should express stricter COMPEL-specific structure and value rules -->
+        <moduleRef key="textstructure"/>
+        
+        <!-- required module tei instantiates lots of classes used for further expansion of this odd -->
+        <moduleRef key="tei"/>
+        <moduleRef key="corpus" include="particDesc"/>
+
+        <elementSpec ident="l" mode="change">
+          <attList>
+            <attDef ident="metNoAnti" usage="opt">
+              <desc>Stores the metrical pattern after anti- or extrarhythmic positions are removed.</desc>
+              <datatype>
+                <dataRef name="token"/>
+              </datatype>
+            </attDef>
+          </attList>
+        </elementSpec>
+
+        <constraintSpec ident="compel-document-structure" scheme="schematron">
+          <constraint>
+            <sch:rule context="tei:TEI">
+              <sch:assert test="tei:teiHeader">A COMPEL TEI document must include teiHeader.</sch:assert>
+              <sch:assert test="tei:text/tei:body">A COMPEL TEI document must include text/body.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:teiHeader">
+              <sch:assert test="tei:fileDesc">teiHeader must include fileDesc.</sch:assert>
+              <sch:assert test="tei:fileDesc/tei:titleStmt">fileDesc must include titleStmt.</sch:assert>
+              <sch:assert test="tei:fileDesc/tei:publicationStmt">fileDesc must include publicationStmt.</sch:assert>
+              <sch:assert test="tei:fileDesc/tei:sourceDesc">fileDesc must include sourceDesc.</sch:assert>
+              <sch:assert test="tei:profileDesc">teiHeader must include profileDesc.</sch:assert>
+              <sch:assert test="tei:profileDesc/tei:particDesc/tei:listPerson/tei:person">profileDesc must identify at least one person in particDesc/listPerson.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:div[@type = 'poem']">
+              <sch:assert test=".//tei:lg[tei:l]">div type="poem" must contain at least one lg with verse lines.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:lg[tei:l]">
+              <sch:assert test="@type">lg elements containing verse lines must have @type.</sch:assert>
+            </sch:rule>
+          </constraint>
+        </constraintSpec>
+
+        <constraintSpec ident="compel-attribute-values" scheme="schematron">
+          <constraint>
+            <sch:rule context="tei:div[@type]">
+              <sch:assert test="@type = ('poem', 'poem-section', 'part', 'front-section', 'preface', 'dedication', 'notes', 'section', 'epigraph')">Unexpected div/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:div[@rend]">
+              <sch:assert test="@rend = ('stars-below', 'dots-below', 'stars-above dots-below', 'stars-above')">Unexpected div/@rend value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:lg[@type]">
+              <sch:assert test="@type = ('cantar', 'copla_arte_maior', 'copla_arte_menor', 'copla_castelá', 'copla_real', 'cosaute', 'cuarteta', 'cuarteta_asonantada', 'cuarteto', 'cuarteto_lira', 'décima_antiga', 'endecha_real', 'espinela', 'estrofa_alcaica', 'estrofa_francisco_de_la_torre', 'estrofa_manriqueña', 'estrofa_sáfica', 'haiku', 'lira', 'novena', 'octavilla', 'oitava', 'oitava_real', 'ovillejo', 'pareado', 'quinteto', 'quintilla', 'redondilla', 'romance', 'romance_arte_maior', 'romance_heroico', 'romancillo', 'seguidilla', 'seguidilla_chamberga', 'seguidilla_composta', 'seguidilla_real', 'seguidilla_xitana', 'serventesio', 'setina', 'sexta_rima', 'sexteto', 'sexteto_lira', 'sextilla', 'silva', 'silva_arromanzada', 'soledad', 'sonetillo', 'soneto', 'soneto_con_estrambote', 'stanza', 'stanza-visual', 'sétima', 'sétima_lira', 'tercerilla', 'tercetillo', 'terceto')">Unexpected lg/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:lg[@cert]">
+              <sch:assert test="number(@cert) = number(@cert) and number(@cert) &gt;= 0 and number(@cert) &lt;= 1">lg/@cert must be a number between 0 and 1.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:lg[@rend]">
+              <sch:assert test="@rend = ('em', 'dots-below')">Unexpected lg/@rend value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@rend]">
+              <sch:assert test="@rend = ('em', 'indent', 'dedent', 'flush', 'indent em', 'dedent em', 'dedent flush', 'indent flush', 'flush indent', 'indent-em')">Unexpected l/@rend value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@part]">
+              <sch:assert test="@part = ('I', 'F')">l/@part must be I or F.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:head[@type]">
+              <sch:assert test="@type = ('sub', 'subtitle', 'dedication')">Unexpected head/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:bibl[@type]">
+              <sch:assert test="@type = ('sourceEdition', 'digitalSource', 'originalSource')">Unexpected bibl/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:term[@type]">
+              <sch:assert test="@type = ('referencia', 'medio', 'xénero', 'variedade', 'canle')">Unexpected term/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:idno[@type]">
+              <sch:assert test="@type = ('wikidata', 'URL', 'tilg')">Unexpected idno/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:idno[@cert]">
+              <sch:assert test="@cert = 'high' or (number(@cert) = number(@cert) and number(@cert) &gt;= 0 and number(@cert) &lt;= 1)">idno/@cert must be "high" or a number between 0 and 1.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:ab[@type]">
+              <sch:assert test="@type = ('dedication', 'byline')">Unexpected ab/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:ab[@rend]">
+              <sch:assert test="@rend = 'em'">Unexpected ab/@rend value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:seg[@rend]">
+              <sch:assert test="@rend = ('em', 'small-caps', 'hi')">Unexpected seg/@rend value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:sex[@value]">
+              <sch:assert test="@value = ('M', 'F', 'U')">sex/@value must be M, F, or U.</sch:assert>
+            </sch:rule>
+          </constraint>
+        </constraintSpec>
+
+        <constraintSpec ident="compel-line-analysis" scheme="schematron">
+          <constraint>
+            <sch:rule context="tei:l[ancestor::tei:div[@type = 'poem']]">
+              <sch:assert test="@met">Verse lines in poems must have @met.</sch:assert>
+              <sch:assert test="@enjamb">Verse lines in poems must have @enjamb.</sch:assert>
+              <sch:assert test="@cert">Verse lines in poems must have @cert.</sch:assert>
+              <sch:assert test="@rhyme">Verse lines in poems must have @rhyme.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@met]">
+              <sch:assert test="matches(normalize-space(@met), '^-?[0-9]+( +-?[0-9]+)*$')">l/@met must be a space-separated list of integer positions.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@metNoAnti]">
+              <sch:assert test="@metNoAnti = '-1' or matches(normalize-space(@metNoAnti), '^[0-9]+( +[0-9]+)*$')">l/@metNoAnti must be -1 or a space-separated list of positive integer positions.</sch:assert>
+              <sch:assert test="not(@met) or normalize-space(@metNoAnti) != normalize-space(@met)">l/@metNoAnti must be omitted when it is identical to @met.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@enjamb]">
+              <sch:assert test="@enjamb = ('2', '3', '4', '5')">l/@enjamb must be one of 2, 3, 4, or 5.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@cert]">
+              <sch:assert test="number(@cert) = number(@cert) and number(@cert) &gt;= 0 and number(@cert) &lt;= 1">l/@cert must be a number between 0 and 1.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@rhyme]">
+              <sch:assert test="@rhyme = '-' or matches(@rhyme, '^[A-Za-zñÑ]+$')">l/@rhyme must be "-" or one or more rhyme letters.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:l[@met and @rhyme != '-']">
+              <sch:assert test="number(tokenize(normalize-space(@met), ' ')[last()]) lt 9 or @rhyme = upper-case(@rhyme)">l/@rhyme must be uppercase when the final @met position is at least 9.</sch:assert>
+            </sch:rule>
+          </constraint>
+        </constraintSpec>
+      </schemaSpec>
+    </body>
+  </text>
+</TEI>
