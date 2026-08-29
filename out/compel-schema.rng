@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2026-08-29T17:12:47Z. .
+Schema generated from ODD source 2026-08-29T20:29:31Z. .
 TEI Edition: Version 4.1.0. Last updated on
 	19th August 2020, revision b414ba550
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.1.0/
@@ -12549,7 +12549,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       </sch:rule>
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                context="tei:lg[tei:l]">
+                context="tei:lg[tei:l and not(ancestor::tei:epigraph)]">
          <sch:assert test="@type">lg elements containing verse lines must have @type.</sch:assert>
       </sch:rule>
    </pattern>
@@ -12618,7 +12618,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:ab[@type]">
-         <sch:assert test="@type = ('dedication', 'award')">Unexpected ab/@type value.</sch:assert>
+         <sch:assert test="@type = ('dedication', 'award', 'source')">Unexpected ab/@type value.</sch:assert>
       </sch:rule>
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -12645,7 +12645,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
             id="tei_cmpl-compel-line-analysis-constraint-rule-49">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                context="tei:l[ancestor::tei:div[@type = 'poem']]">
+                context="tei:l[ancestor::tei:div[@type = 'poem'] and not(ancestor::tei:epigraph)]">
          <sch:assert test="@met">Verse lines in poems must have @met.</sch:assert>
          <sch:assert test="@enjamb">Verse lines in poems must have @enjamb.</sch:assert>
          <sch:assert test="@cert">Verse lines in poems must have @cert.</sch:assert>
@@ -12680,7 +12680,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:l[@met and @rhyme != '-']">
-         <sch:assert test="number(tokenize(normalize-space(@met), ' ')[last()]) lt 9 or @rhyme = upper-case(@rhyme)">l/@rhyme must be uppercase when the final @met position is at least 9.</sch:assert>
+         <sch:assert test="number(tokenize(normalize-space(@met), ' ')[last()]) lt 8 or @rhyme = upper-case(@rhyme)">l/@rhyme must be uppercase when the final @met position is at least 8.</sch:assert>
       </sch:rule>
    </pattern>
 </grammar>
