@@ -91,7 +91,7 @@
             <sch:rule context="tei:div[@type = 'poem']">
               <sch:assert test=".//tei:lg[tei:l]">div type="poem" must contain at least one lg with verse lines.</sch:assert>
             </sch:rule>
-            <sch:rule context="tei:lg[tei:l]">
+            <sch:rule context="tei:lg[tei:l and not(ancestor::tei:epigraph)]">
               <sch:assert test="@type">lg elements containing verse lines must have @type.</sch:assert>
             </sch:rule>
           </constraint>
@@ -155,7 +155,7 @@
 
         <constraintSpec ident="compel-line-analysis" scheme="schematron">
           <constraint>
-            <sch:rule context="tei:l[ancestor::tei:div[@type = 'poem']]">
+            <sch:rule context="tei:l[ancestor::tei:div[@type = 'poem'] and not(ancestor::tei:epigraph)]">
               <sch:assert test="@met">Verse lines in poems must have @met.</sch:assert>
               <sch:assert test="@enjamb">Verse lines in poems must have @enjamb.</sch:assert>
               <sch:assert test="@cert">Verse lines in poems must have @cert.</sch:assert>
@@ -178,7 +178,7 @@
               <sch:assert test="@rhyme = '-' or matches(@rhyme, '^[A-Za-zñÑ]+$')">l/@rhyme must be "-" or one or more rhyme letters.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:l[@met and @rhyme != '-']">
-              <sch:assert test="number(tokenize(normalize-space(@met), ' ')[last()]) lt 9 or @rhyme = upper-case(@rhyme)">l/@rhyme must be uppercase when the final @met position is at least 9.</sch:assert>
+              <sch:assert test="number(tokenize(normalize-space(@met), ' ')[last()]) lt 8 or @rhyme = upper-case(@rhyme)">l/@rhyme must be uppercase when the final @met position is at least 8.</sch:assert>
             </sch:rule>
           </constraint>
         </constraintSpec>
