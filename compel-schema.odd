@@ -62,6 +62,18 @@
           </attList>
         </elementSpec>
 
+        <elementSpec ident="ab" mode="change">
+          <classes>
+            <memberOf key="att.global"/>
+            <memberOf key="model.pLike"/>
+            <memberOf key="att.typed"/>
+            <memberOf key="att.declaring"/>
+            <memberOf key="att.fragmentable"/>
+            <memberOf key="att.written"/>
+            <memberOf key="model.divTopPart"/>
+          </classes>
+        </elementSpec>
+
         <constraintSpec ident="compel-document-structure" scheme="schematron">
           <constraint>
             <sch:rule context="tei:TEI">
@@ -124,7 +136,10 @@
               <sch:assert test="@cert = 'high' or (number(@cert) = number(@cert) and number(@cert) &gt;= 0 and number(@cert) &lt;= 1)">idno/@cert must be "high" or a number between 0 and 1.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:ab[@type]">
-              <sch:assert test="@type = ('dedication', 'byline')">Unexpected ab/@type value.</sch:assert>
+              <sch:assert test="@type = ('dedication', 'award')">Unexpected ab/@type value.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:div/tei:ab[following-sibling::*[self::tei:epigraph]]">
+              <sch:assert test="@type = 'award'">An ab used before an epigraph in div top matter must have type="award".</sch:assert>
             </sch:rule>
             <sch:rule context="tei:ab[@rend]">
               <sch:assert test="@rend = 'em'">Unexpected ab/@rend value.</sch:assert>
