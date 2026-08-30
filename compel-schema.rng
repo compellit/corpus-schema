@@ -12540,7 +12540,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
          <sch:assert test="tei:fileDesc/tei:publicationStmt">fileDesc must include publicationStmt.</sch:assert>
          <sch:assert test="tei:fileDesc/tei:sourceDesc">fileDesc must include sourceDesc.</sch:assert>
          <sch:assert test="tei:profileDesc">teiHeader must include profileDesc.</sch:assert>
-         <sch:assert test="tei:profileDesc/tei:particDesc/tei:listPerson/tei:person">profileDesc must identify at least one person in particDesc/listPerson.</sch:assert>
+         <sch:assert test="normalize-space(string(tei:fileDesc/tei:titleStmt/tei:author)) = ('Anónimo', 'Varios autores') or tei:profileDesc/tei:particDesc/tei:listPerson/tei:person">profileDesc must identify at least one person in particDesc/listPerson unless the titleStmt author is Anónimo or Varios autores.</sch:assert>
       </sch:rule>
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
