@@ -12548,7 +12548,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       </sch:rule>
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                context="tei:lg[tei:l]">
+                context="tei:lg[tei:l and not(ancestor::tei:epigraph)]">
          <sch:assert test="@type">lg elements containing verse lines must have @type.</sch:assert>
       </sch:rule>
    </pattern>
@@ -12639,7 +12639,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
             id="tei_cmpl-compel-line-analysis-constraint-rule-48">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                context="tei:l[ancestor::tei:div[@type = 'poem']]">
+                context="tei:l[ancestor::tei:div[@type = 'poem'] and not(ancestor::tei:epigraph)]">
          <sch:assert test="@met">Verse lines in poems must have @met.</sch:assert>
          <sch:assert test="@enjamb">Verse lines in poems must have @enjamb.</sch:assert>
          <sch:assert test="@cert">Verse lines in poems must have @cert.</sch:assert>
