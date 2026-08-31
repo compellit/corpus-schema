@@ -62,6 +62,27 @@
           </attList>
         </elementSpec>
 
+        <elementSpec ident="metDecl" mode="change">
+          <attList>
+            <attDef ident="type" mode="change" usage="opt">
+              <valList type="closed" mode="replace">
+                <valItem ident="met">
+                  <desc>Identifies the metrical annotation scheme described by this metDecl.</desc>
+                </valItem>
+                <valItem ident="enjamb">
+                  <desc>Identifies the enjambment annotation scheme described by this metDecl (as a customization we included enjambment encoding description under metDecl).</desc>
+                </valItem>
+                <valItem ident="rhyme">
+                  <desc>Identifies the rhyme annotation scheme described by this metDecl.</desc>
+                </valItem>
+                <valItem ident="stanza">
+                  <desc>Identifies the stanza annotation scheme described by this metDecl (as a customization we included stanza type classification under metDecl).</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+
         <elementSpec ident="ab" mode="change">
           <classes>
             <memberOf key="att.global"/>
