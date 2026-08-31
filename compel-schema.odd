@@ -69,6 +69,9 @@
                 <valItem ident="met">
                   <desc>Identifies the metrical annotation scheme described by this metDecl.</desc>
                 </valItem>
+                <valItem ident="real">
+                  <desc>Identifies the actual prosodic realization scheme described by this metDecl.</desc>
+                </valItem>
                 <valItem ident="enjamb">
                   <desc>Identifies the enjambment annotation scheme described by this metDecl (as a customization we included enjambment encoding description under metDecl).</desc>
                 </valItem>

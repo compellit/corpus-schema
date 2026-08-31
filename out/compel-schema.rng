@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2026-08-31T22:15:18Z. .
+Schema generated from ODD source 2026-08-31T22:31:45Z. .
 TEI Edition: Version 4.1.0. Last updated on
 	19th August 2020, revision b414ba550
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.1.0/
@@ -114,7 +114,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.1.0/
             </choice>
          </zeroOrMore>
       </element>
-      <pattern xmlns="http://purl.oclc.org/dsdl/schematron" id="d9e51998-constraint">
+      <pattern xmlns="http://purl.oclc.org/dsdl/schematron" id="d9e52002-constraint">
          <rule context="tei:content">
             <report test="descendant::*[not(namespace-uri(.) =               ('http://relaxng.org/ns/structure/1.0', 'http://www.tei-c.org/ns/1.0'))]">content descendants must be in the
               namespaces
@@ -163,7 +163,7 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.1.0/
             </choice>
          </zeroOrMore>
       </element>
-      <pattern xmlns="http://purl.oclc.org/dsdl/schematron" id="d9e53162-constraint">
+      <pattern xmlns="http://purl.oclc.org/dsdl/schematron" id="d9e53166-constraint">
          <rule context="tei:datatype">
             <report test="descendant::*[not(namespace-uri(.) =               ('http://relaxng.org/ns/structure/1.0', 'http://www.tei-c.org/ns/1.0'))]">datatype descendants must be in the
               namespaces
@@ -7909,6 +7909,8 @@ Sample values include: 1] no; 2] yes; 3] weak; 4] strong</a:documentation>
                   <choice>
                      <value>met</value>
                      <a:documentation>Identifies the metrical annotation scheme described by this metDecl.</a:documentation>
+                     <value>real</value>
+                     <a:documentation>Identifies the actual prosodic realization scheme described by this metDecl.</a:documentation>
                      <value>enjamb</value>
                      <a:documentation>Identifies the enjambment annotation scheme described by this metDecl (as a customization we included enjambment encoding description under metDecl).</a:documentation>
                      <value>rhyme</value>
@@ -7920,6 +7922,8 @@ Sample values include: 1] no; 2] yes; 3] weak; 4] strong</a:documentation>
                      <choice>
                         <value>met</value>
                         <a:documentation>Identifies the metrical annotation scheme described by this metDecl.</a:documentation>
+                        <value>real</value>
+                        <a:documentation>Identifies the actual prosodic realization scheme described by this metDecl.</a:documentation>
                         <value>enjamb</value>
                         <a:documentation>Identifies the enjambment annotation scheme described by this metDecl (as a customization we included enjambment encoding description under metDecl).</a:documentation>
                         <value>rhyme</value>
@@ -7932,6 +7936,8 @@ Sample values include: 1] no; 2] yes; 3] weak; 4] strong</a:documentation>
                      <choice>
                         <value>met</value>
                         <a:documentation>Identifies the metrical annotation scheme described by this metDecl.</a:documentation>
+                        <value>real</value>
+                        <a:documentation>Identifies the actual prosodic realization scheme described by this metDecl.</a:documentation>
                         <value>enjamb</value>
                         <a:documentation>Identifies the enjambment annotation scheme described by this metDecl (as a customization we included enjambment encoding description under metDecl).</a:documentation>
                         <value>rhyme</value>
