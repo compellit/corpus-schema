@@ -53,7 +53,7 @@
 
         <elementSpec ident="l" mode="change">
           <attList>
-            <attDef ident="metNoAnti" usage="opt">
+            <attDef ident="metRg" usage="opt">
               <desc>Stores the metrical pattern after anti- or extrarhythmic positions are removed.</desc>
               <datatype>
                 <dataRef name="token"/>
@@ -164,9 +164,9 @@
             <sch:rule context="tei:l[@met]">
               <sch:assert test="matches(normalize-space(@met), '^-?[0-9]+( +-?[0-9]+)*$')">l/@met must be a space-separated list of integer positions.</sch:assert>
             </sch:rule>
-            <sch:rule context="tei:l[@metNoAnti]">
-              <sch:assert test="@metNoAnti = '-1' or matches(normalize-space(@metNoAnti), '^[0-9]+( +[0-9]+)*$')">l/@metNoAnti must be -1 or a space-separated list of positive integer positions.</sch:assert>
-              <sch:assert test="not(@met) or normalize-space(@metNoAnti) != normalize-space(@met)">l/@metNoAnti must be omitted when it is identical to @met.</sch:assert>
+            <sch:rule context="tei:l[@metRg]">
+              <sch:assert test="@metRg = '-1' or matches(normalize-space(@metRg), '^[0-9]+( +[0-9]+)*$')">l/@metRg must be -1 or a space-separated list of positive integer positions.</sch:assert>
+              <sch:assert test="not(@met) or normalize-space(@metRg) != normalize-space(@met)">l/@metRg must be omitted when it is identical to @met.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:l[@enjamb]">
               <sch:assert test="@enjamb = ('2', '3', '4', '5')">l/@enjamb must be one of 2, 3, 4, or 5.</sch:assert>
