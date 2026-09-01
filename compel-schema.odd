@@ -130,6 +130,7 @@
               <sch:assert test="@rend = ('stars-below', 'dots-below', 'stars-above dots-below', 'stars-above')">Unexpected div/@rend value.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:lg[@type]">
+              <sch:title>Stanza type inventory</sch:title>
               <sch:assert test="@type = ('cantar', 'copla_arte_maior', 'copla_arte_menor', 'copla_castelá', 'copla_real', 'cosaute', 'cuarteta', 'cuarteta_asonantada', 'cuarteto', 'cuarteto_lira', 'décima_antiga', 'endecha_real', 'espinela', 'estrofa_alcaica', 'estrofa_francisco_de_la_torre', 'estrofa_manriqueña', 'estrofa_sáfica', 'haiku', 'lira', 'novena', 'octavilla', 'oitava', 'oitava_real', 'ovillejo', 'pareado', 'quinteto', 'quintilla', 'redondilla', 'romance', 'romance_arte_maior', 'romance_heroico', 'romancillo', 'seguidilla', 'seguidilla_chamberga', 'seguidilla_composta', 'seguidilla_real', 'seguidilla_xitana', 'serventesio', 'setina', 'sexta_rima', 'sexteto', 'sexteto_lira', 'sextilla', 'silva', 'silva_arromanzada', 'soledad', 'sonetillo', 'soneto', 'soneto_con_estrambote', 'stanza', 'stanza-visual', 'sétima', 'sétima_lira', 'tercerilla', 'tercetillo', 'terceto')">Unexpected lg/@type value.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:lg[@cert]">
