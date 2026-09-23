@@ -126,6 +126,10 @@
             <sch:rule context="tei:div[@type]">
               <sch:assert test="@type = ('poem', 'poem-section', 'part', 'front-section', 'preface', 'dedication', 'notes', 'section', 'epigraph')">Unexpected div/@type value.</sch:assert>
             </sch:rule>
+            <sch:rule context="tei:div[@subtype]">
+              <sch:assert test="@subtype = 'subpoem'">Unexpected div/@subtype value; the only permitted value is "subpoem".</sch:assert>
+              <sch:assert test="@type = 'poem-section'">div/@subtype="subpoem" may be used only with div/@type="poem-section".</sch:assert>
+            </sch:rule>
             <sch:rule context="tei:div[@rend]">
               <sch:assert test="@rend = ('stars-below', 'dots-below', 'stars-above dots-below', 'stars-above')">Unexpected div/@rend value.</sch:assert>
             </sch:rule>

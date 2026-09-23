@@ -5,7 +5,7 @@
          xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2026-09-01T22:44:04Z. .
+Schema generated from ODD source 2026-09-23T18:33:11Z. .
 TEI Edition: Version 4.1.0. Last updated on
 	19th August 2020, revision b414ba550
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.1.0/
@@ -12574,6 +12574,12 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       </sch:rule>
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                context="tei:div[@subtype]">
+         <sch:assert test="@subtype = 'subpoem'">Unexpected div/@subtype value; the only permitted value is "subpoem".</sch:assert>
+         <sch:assert test="@type = 'poem-section'">div/@subtype="subpoem" may be used only with div/@type="poem-section".</sch:assert>
+      </sch:rule>
+      <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:div[@rend]">
          <sch:assert test="@rend = ('stars-below', 'dots-below', 'stars-above dots-below', 'stars-above')">Unexpected div/@rend value.</sch:assert>
       </sch:rule>
@@ -12655,7 +12661,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       </sch:rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="tei_cmpl-compel-line-analysis-constraint-rule-49">
+            id="tei_cmpl-compel-line-analysis-constraint-rule-50">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:l[ancestor::tei:div[@type = 'poem'] and not(ancestor::tei:epigraph)]">
