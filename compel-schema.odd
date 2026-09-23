@@ -122,11 +122,18 @@
         </constraintSpec>
 
         <constraintSpec ident="compel-attribute-values" scheme="schematron">
+          <desc>
+            Constrains project-specific attribute values. On a div with type="poem-section",
+            subtype="subpoem" indicates that the section is to be treated as an independently
+            selectable textual unit while retaining its relationship to the parent poem (e.g for
+            poem-ID assignment or for display in the project's navigation interface).
+          </desc>
           <constraint>
             <sch:rule context="tei:div[@type]">
               <sch:assert test="@type = ('poem', 'poem-section', 'part', 'front-section', 'preface', 'dedication', 'notes', 'section', 'epigraph')">Unexpected div/@type value.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:div[@subtype]">
+              <sch:title>Independently selectable poem sections</sch:title>
               <sch:assert test="@subtype = 'subpoem'">Unexpected div/@subtype value; the only permitted value is "subpoem".</sch:assert>
               <sch:assert test="@type = 'poem-section'">div/@subtype="subpoem" may be used only with div/@type="poem-section".</sch:assert>
             </sch:rule>
