@@ -196,7 +196,6 @@
             <sch:rule context="tei:l[ancestor::tei:div[@type = 'poem'] and not(ancestor::tei:epigraph)]">
               <sch:assert test="@met">Verse lines in poems must have @met.</sch:assert>
               <sch:assert test="@enjamb">Verse lines in poems must have @enjamb.</sch:assert>
-              <sch:assert test="@cert">Verse lines in poems must have @cert.</sch:assert>
               <sch:assert test="@rhyme">Verse lines in poems must have @rhyme.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:l[@met]">
