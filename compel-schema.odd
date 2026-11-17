@@ -219,6 +219,25 @@
             </sch:rule>
           </constraint>
         </constraintSpec>
+
+        <constraintSpec ident="compel-choice" scheme="schematron">
+          <desc>
+            Restricts choice to the pairs used for the project's minor editorial interventions,
+            with the source reading first: abbr + expan (abbreviations expanded for scansion,
+            e.g. V. as Usted), orig + reg (e.g. Roman numerals written out, XVIII as dezaoito) and
+            sic + corr (obvious errors in the TILG transcription). The project's reading has
+            resp="#cpl". The analysis scripts (analysis/tag_tei_poems.py,
+            analysis/postprocess_met_and_rhyme.py) read expan, reg and corr and skip abbr, orig
+            and sic: any other element in choice would be read as part of the verse.
+          </desc>
+          <constraint>
+            <sch:rule context="tei:choice">
+              <sch:assert test="count(*) = 2 and ((*[1][self::tei:abbr] and *[2][self::tei:expan]) or (*[1][self::tei:orig] and *[2][self::tei:reg]) or (*[1][self::tei:sic] and *[2][self::tei:corr]))">choice must contain exactly one of the pairs abbr + expan, orig + reg or sic + corr, in that order.</sch:assert>
+              <sch:assert test="not(normalize-space(string-join(text(), '')))">choice must not contain text outside its two elements.</sch:assert>
+              <sch:assert test="*[2]/@resp">The project's reading in choice (expan, reg or corr) must have @resp.</sch:assert>
+            </sch:rule>
+          </constraint>
+        </constraintSpec>
       </schemaSpec>
     </body>
   </text>
