@@ -98,6 +98,42 @@
           </classes>
         </elementSpec>
 
+        <elementSpec ident="note" mode="change">
+          <attList>
+            <attDef ident="type" mode="change">
+              <desc>
+                Kinds of note in the corpus. Notes without a type are notes of the source (the
+                author's or the edition's). Add a value here before using a new type.
+              </desc>
+              <valList type="closed" mode="replace">
+                <valItem ident="date">
+                  <desc>How the date of a work or poem was established, or the source's note on that
+                    date (in the bibliographic description or in a poem).</desc>
+                </valItem>
+                <valItem ident="edition">
+                  <desc>Information on the edition of the source (facsimile, volume...), in the
+                    bibliographic description.</desc>
+                </valItem>
+                <valItem ident="printer">
+                  <desc>Printer or press of the source, in the bibliographic description.</desc>
+                </valItem>
+                <valItem ident="publicationContext">
+                  <desc>Where or on what occasion the work was published or presented (newspaper,
+                    literary contest...), in the bibliographic description.</desc>
+                </valItem>
+                <valItem ident="gloss">
+                  <desc>Gloss of a word in a verse (e.g. its Spanish equivalent), with xml:lang.</desc>
+                </valItem>
+                <valItem ident="translation">
+                  <desc>The poem is a translation. A note with text is printed in the source; an empty
+                    one was added by the COMPEL project (resp="#cpl"). A bibl inside, added by the
+                    project, describes the original (author, title, textLang).</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+        </elementSpec>
+
         <constraintSpec ident="compel-document-structure" scheme="schematron">
           <constraint>
             <sch:rule context="tei:TEI">
@@ -216,6 +252,24 @@
             </sch:rule>
             <sch:rule context="tei:l[@met and @rhyme != '-']">
               <sch:assert test="number(tokenize(normalize-space(@met), ' ')[last()]) lt 8 or @rhyme = upper-case(@rhyme)">l/@rhyme must be uppercase when the final @met position is at least 8.</sch:assert>
+            </sch:rule>
+          </constraint>
+        </constraintSpec>
+
+        <constraintSpec ident="compel-note-types" scheme="schematron">
+          <desc>
+            Where each note/@type may be used (the values themselves are a closed list on note).
+            edition, printer and publicationContext describe the source: only in a bibl of the
+            teiHeader. gloss and translation are about the text of a poem: only in text. date
+            may be in both (how a work was dated, in the bibliographic description; a source's
+            note on the date of a poem, in the text).
+          </desc>
+          <constraint>
+            <sch:rule context="tei:note[@type = ('edition', 'printer', 'publicationContext')]">
+              <sch:assert test="parent::tei:bibl and ancestor::tei:teiHeader">note type="<sch:value-of select="@type"/>" is only allowed in a bibl of the teiHeader.</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:note[@type = ('gloss', 'translation')]">
+              <sch:assert test="ancestor::tei:text">note type="<sch:value-of select="@type"/>" is only allowed in text.</sch:assert>
             </sch:rule>
           </constraint>
         </constraintSpec>
