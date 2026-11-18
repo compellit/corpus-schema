@@ -202,7 +202,7 @@
               <sch:assert test="@type = ('sub', 'subtitle', 'dedication')">Unexpected head/@type value.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:bibl[@type]">
-              <sch:assert test="@type = ('sourceEdition', 'digitalSource', 'originalSource')">Unexpected bibl/@type value.</sch:assert>
+              <sch:assert test="@type = ('sourceEdition', 'digitalSource', 'originalSource', 'host')">Unexpected bibl/@type value.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:term[@type]">
               <sch:assert test="@type = ('referencia', 'medio', 'xénero', 'variedade', 'canle')">Unexpected term/@type value.</sch:assert>
