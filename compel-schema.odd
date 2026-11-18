@@ -110,6 +110,10 @@
                   <desc>How the date of a work or poem was established, or the source's note on that
                     date (in the bibliographic description or in a poem).</desc>
                 </valItem>
+                <valItem ident="editorial">
+                  <desc>A note written by the COMPEL project (resp="#cpl"), not printed in the source:
+                    information about one poem, e.g. where its stanza divisions come from.</desc>
+                </valItem>
                 <valItem ident="edition">
                   <desc>Information on the edition of the source (facsimile, volume...), in the
                     bibliographic description.</desc>
@@ -260,7 +264,7 @@
           <desc>
             Where each note/@type may be used (the values themselves are a closed list on note).
             edition, printer and publicationContext describe the source: only in a bibl of the
-            teiHeader. gloss and translation are about the text of a poem: only in text. date
+            teiHeader. editorial, gloss and translation are about the text of a poem: only in text. date
             may be in both (how a work was dated, in the bibliographic description; a source's
             note on the date of a poem, in the text).
           </desc>
@@ -268,7 +272,7 @@
             <sch:rule context="tei:note[@type = ('edition', 'printer', 'publicationContext')]">
               <sch:assert test="parent::tei:bibl and ancestor::tei:teiHeader">note type="<sch:value-of select="@type"/>" is only allowed in a bibl of the teiHeader.</sch:assert>
             </sch:rule>
-            <sch:rule context="tei:note[@type = ('gloss', 'translation')]">
+            <sch:rule context="tei:note[@type = ('editorial', 'gloss', 'translation')]">
               <sch:assert test="ancestor::tei:text">note type="<sch:value-of select="@type"/>" is only allowed in text.</sch:assert>
             </sch:rule>
           </constraint>
