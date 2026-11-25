@@ -204,6 +204,16 @@
             <sch:rule context="tei:bibl[@type]">
               <sch:assert test="@type = ('sourceEdition', 'digitalSource', 'originalSource', 'host')">Unexpected bibl/@type value.</sch:assert>
             </sch:rule>
+            <sch:rule context="tei:analytic/tei:title[@level]">
+              <sch:title>Title levels in biblStruct</sch:title>
+              <!-- analytic: the text (poem, poems of one author in an anthology, or an early text
+                   in a later edition); monogr: the book (m), periodical (j) or unpublished
+                   thesis (u) -->
+              <sch:assert test="@level = 'a'">analytic/title must have level="a".</sch:assert>
+            </sch:rule>
+            <sch:rule context="tei:monogr/tei:title[@level]">
+              <sch:assert test="@level = ('m', 'j', 'u')">monogr/title must have level="m", "j" or "u".</sch:assert>
+            </sch:rule>
             <sch:rule context="tei:term[@type]">
               <sch:assert test="@type = ('referencia', 'medio', 'xénero', 'variedade', 'canle')">Unexpected term/@type value.</sch:assert>
             </sch:rule>
@@ -263,14 +273,14 @@
         <constraintSpec ident="compel-note-types" scheme="schematron">
           <desc>
             Where each note/@type may be used (the values themselves are a closed list on note).
-            edition, printer and publicationContext describe the source: only in a bibl of the
-            teiHeader. editorial, gloss and translation are about the text of a poem: only in text. date
+            edition, printer and publicationContext describe the source: only in a bibl or biblStruct
+            of the teiHeader (in a biblStruct, as children of biblStruct after monogr, or in monogr). editorial, gloss and translation are about the text of a poem: only in text. date
             may be in both (how a work was dated, in the bibliographic description; a source's
             note on the date of a poem, in the text).
           </desc>
           <constraint>
             <sch:rule context="tei:note[@type = ('edition', 'printer', 'publicationContext')]">
-              <sch:assert test="parent::tei:bibl and ancestor::tei:teiHeader">note type="<sch:value-of select="@type"/>" is only allowed in a bibl of the teiHeader.</sch:assert>
+              <sch:assert test="(parent::tei:bibl or parent::tei:biblStruct or parent::tei:monogr) and ancestor::tei:teiHeader">note type="<sch:value-of select="@type"/>" is only allowed in a bibl, biblStruct or monogr of the teiHeader.</sch:assert>
             </sch:rule>
             <sch:rule context="tei:note[@type = ('editorial', 'gloss', 'translation')]">
               <sch:assert test="ancestor::tei:text">note type="<sch:value-of select="@type"/>" is only allowed in text.</sch:assert>
